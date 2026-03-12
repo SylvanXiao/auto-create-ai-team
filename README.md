@@ -122,7 +122,7 @@ python3 test_comprehensive.py
 
 ### 联系方式
 
-Your Name - your.email@example.com
+萧远行-Sylvanxiao@outlook.com
 
 项目链接: [https://github.com/your-username/auto-create-ai-team](https://github.com/your-username/auto-create-ai-team)
 
@@ -241,6 +241,6 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ### Contact
 
-Your Name - your.email@example.com
+萧远行-Sylvanxiao@outlook.com
 
 Project Link: [https://github.com/your-username/auto-create-ai-team](https://github.com/your-username/auto-create-ai-team)
