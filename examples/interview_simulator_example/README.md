@@ -1,4 +1,4 @@
-# AI面试模拟器项目AI团队示例
+# 通用互联网项目AI团队示例
 
 ## 项目类型
 - 产品开发类项目
@@ -15,5 +15,5 @@
 
 ## 使用方法
 ```bash
-python create_ai_team.py --project-name "interview-simulator" --project-type "product-development" --supervisor "zhuazhua"
+python create_ai_team.py --project-name "common-network-project" --project-type "product-development" --supervisor "Sylvan"
 ```
