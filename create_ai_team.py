@@ -13,22 +13,20 @@ import argparse
 from pathlib import Path
 
 def detect_project_type(project_path):
-    """自动检测项目类型"""
+    """自动检测项目类型 - 通用版本"""
     project_name = os.path.basename(project_path).lower()
     
-    # ALM知识库项目
-    if 'alm' in project_name or 'knowledge' in project_name or '知识库' in project_name:
-        return 'alm'
-    
-    # 面试模拟器项目  
-    elif 'interview' in project_name or '面试' in project_name or 'pm' in project_name:
-        return 'interview'
-    
-    # AI壁纸项目
-    elif 'wallpaper' in project_name or '壁纸' in project_name or 'ai' in project_name:
-        return 'ai_wallpaper'
-    
-    # 通用项目
+    # 通用项目类型检测（基于常见关键词）
+    if any(keyword in project_name for keyword in ['web', 'website', 'frontend', 'ui', 'interface']):
+        return 'web_app'
+    elif any(keyword in project_name for keyword in ['ecommerce', 'shop', 'store', 'marketplace', '电商', '商店']):
+        return 'ecommerce'
+    elif any(keyword in project_name for keyword in ['cms', 'content', 'blog', 'article', '新闻', '博客']):
+        return 'content_management'
+    elif any(keyword in project_name for keyword in ['mobile', 'app', 'ios', 'android', 'phone', '移动']):
+        return 'mobile_app'
+    elif any(keyword in project_name for keyword in ['api', 'backend', 'server', 'microservice', '服务端']):
+        return 'backend_service'
     else:
         return 'generic'
 
@@ -64,15 +62,19 @@ def create_internal_ai_team(project_path, project_type):
     team_info_dir = os.path.join(ai_team_dir, 'team-info')
     os.makedirs(team_info_dir, exist_ok=True)
     
-    # 根据项目类型创建不同的团队成员
-    if project_type == 'alm':
-        members = ['Data Updater', 'Research Analyst', 'Innovation Specialist', 'Quality Assurance']
-    elif project_type == 'interview':
-        members = ['Product Manager', 'Technical Architect', 'Frontend Developer', 'Backend Developer', 'QA Engineer', 'UX/UI Designer', 'DevOps Engineer']
-    elif project_type == 'ai_wallpaper':
-        members = ['Creative Designer', 'Technical Developer', 'Market Analyst', 'Quality Assurance', 'Content Curator']
+    # 根据通用项目类型创建不同的团队成员
+    if project_type == 'web_app':
+        members = ['Product Manager', 'Frontend Developer', 'Backend Developer', 'QA Engineer', 'UX/UI Designer']
+    elif project_type == 'ecommerce':
+        members = ['Technical Architect', 'Full-stack Developer', 'UX Designer', 'Payment Integration Specialist', 'QA Engineer']
+    elif project_type == 'content_management':
+        members = ['System Architect', 'Backend Developer', 'Content Strategist', 'Frontend Developer', 'Quality Assurance']
+    elif project_type == 'mobile_app':
+        members = ['Mobile Developer', 'Backend Engineer', 'UI/UX Designer', 'QA Engineer', 'DevOps Engineer']
+    elif project_type == 'backend_service':
+        members = ['Backend Architect', 'API Developer', 'Database Engineer', 'DevOps Engineer', 'Security Specialist']
     else:
-        members = ['AI Assistant', 'Data Processor', 'Content Generator', 'Quality Checker']
+        members = ['AI Assistant', 'Data Processor', 'Content Generator', 'Quality Checker', 'Project Coordinator']
     
     # 创建团队配置文件
     config_content = f"""# 内部AI团队配置
@@ -189,7 +191,7 @@ def create_project_progress_file(project_path, team_type, project_type):
 def main():
     parser = argparse.ArgumentParser(description='Auto Create AI Team Skill v2.0')
     parser.add_argument('--project-path', required=True, help='项目路径')
-    parser.add_argument('--project-type', choices=['alm', 'interview', 'ai_wallpaper', 'generic'], help='项目类型')
+    parser.add_argument('--project-type', choices=['web_app', 'ecommerce', 'content_management', 'mobile_app', 'backend_service', 'generic'], help='项目类型')
     parser.add_argument('--team-type', choices=['single', 'dual', 'custom'], help='团队类型')
     parser.add_argument('--auto-detect', action='store_true', help='自动检测项目类型')
     parser.add_argument('--ask-user', action='store_true', help='询问用户配置')
@@ -217,8 +219,8 @@ def main():
         team_type = ask_user_for_team_type(args.project_path)
     else:
         # 默认根据项目类型决定
-        if project_type in ['ai_wallpaper', 'interview']:
-            team_type = 'dual'  # AI壁纸和面试模拟器默认双团队
+        if project_type in ['ecommerce', 'mobile_app']:
+            team_type = 'dual'  # 电商和移动应用默认双团队
         else:
             team_type = 'single'  # 其他项目默认单团队
     
