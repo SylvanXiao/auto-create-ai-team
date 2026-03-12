@@ -1,5 +1,5 @@
 """
-MCP Service Configuration
+MCP Service Configuration - Generic Version
 """
 import os
 
@@ -8,14 +8,17 @@ SERVICE_HOST = os.getenv("MCP_HOST", "0.0.0.0")
 SERVICE_PORT = int(os.getenv("MCP_PORT", "8085"))
 SERVICE_DEBUG = os.getenv("MCP_DEBUG", "false").lower() == "true"
 
-# Skill configuration
-SKILL_PATH = os.getenv("SKILL_PATH", "D:/项目/openclaw/skills/auto-create-ai-team/create_ai_team.py")
-PROJECT_BASE_PATH = os.getenv("PROJECT_BASE_PATH", "C:/Users/50473/.openclaw/workspace")
+# Skill configuration - Use relative paths and environment variables
+SKILL_PATH = os.getenv("SKILL_PATH", "./create_ai_team.py")
+PROJECT_BASE_PATH = os.getenv("PROJECT_BASE_PATH", "./projects")
 
-# Security configuration  
+# Security configuration - Allow relative paths and common OpenClaw directories
 ALLOWED_PROJECT_PATHS = [
-    "C:/Users/50473/.openclaw/workspace",
-    "D:/wsl-ubuntu/rootfs/openclaw-vm/projects"
+    "./projects",
+    "./workspace",
+    "/root/.openclaw/workspace",
+    "/home/user/.openclaw/workspace",
+    "/opt/openclaw/workspace"
 ]
 
 # Logging configuration
