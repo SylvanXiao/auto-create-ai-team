@@ -111,4 +111,4 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 Your Name - your.email@example.com
 
-Project Link: [https://github.com/your-username/auto-create-ai-team](https://github.com/your-username/auto-create-ai-team)
+Project Link: [https://github.com/barryxiao/auto-create-ai-team](https://github.com/barryxiao/auto-create-ai-team)
