@@ -3,18 +3,6 @@
   "auto_detect_project_type": true,
   "create_progress_file": true,
   "team_templates": {
-    "alm": {
-      "internal_team": ["Data Updater", "Research Analyst", "Innovation Specialist", "Quality Assurance"],
-      "internet_team": ["Product Manager", "Marketing Specialist", "Social Media Operator", "Data Analyst"]
-    },
-    "interview": {
-      "internal_team": ["Product Manager", "Technical Architect", "Frontend Developer", "Backend Developer", "QA Engineer", "UX/UI Designer", "DevOps Engineer"],
-      "internet_team": ["Product Manager", "Marketing Specialist", "Social Media Operator", "Data Analyst", "Business Development Manager", "User Researcher"]
-    },
-    "ai_wallpaper": {
-      "internal_team": ["Creative Designer", "Technical Developer", "Market Analyst", "Quality Assurance", "Content Curator"],
-      "internet_team": ["Product Manager", "Marketing Specialist", "Social Media Operator", "Data Analyst", "Business Development Manager"]
-    },
     "generic": {
       "internal_team": ["AI Assistant", "Data Processor", "Content Generator", "Quality Checker"],
       "internet_team": ["Product Manager", "Marketing Specialist", "Social Media Operator", "Data Analyst"]

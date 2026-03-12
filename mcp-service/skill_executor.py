@@ -28,7 +28,7 @@ def execute_ai_team_creation(
     
     Args:
         project_path: Path to the project directory
-        project_type: Type of project (alm, interview, generic, custom)
+        project_type: Type of project (generic, custom)
         team_size: Size of the AI team (small, medium, large)
         models: Model strategy (free, premium, mixed)
     

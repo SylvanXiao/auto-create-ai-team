@@ -122,9 +122,9 @@ python3 test_comprehensive.py
 
 ### 联系方式
 
-萧远行-Sylvanxiao@outlook.com
+请通过GitHub Issues提交问题或建议。
 
-项目链接: 暂无
+项目链接: https://github.com/SylvanXiao/auto-create-ai-team
 
 ---
 
@@ -241,6 +241,6 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ### Contact
 
-Sylvan -Sylvanxiao@outlook.com
+Please submit issues or suggestions through GitHub Issues.
 
-Project Link: None
+Project Link: https://github.com/SylvanXiao/auto-create-ai-team

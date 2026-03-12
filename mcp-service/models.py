@@ -4,7 +4,7 @@ from typing import Optional, Literal
 class CreateAITeamRequest(BaseModel):
     """创建AI团队的请求模型"""
     project_path: str
-    project_type: Literal["alm", "interview", "generic", "custom"] = "generic"
+    project_type: Literal["generic", "custom"] = "generic"
     team_size: Literal["small", "medium", "large"] = "medium"
     models: Literal["free", "premium", "mixed"] = "mixed"
 
