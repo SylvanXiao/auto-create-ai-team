@@ -1,249 +1,93 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Auto Create AI Team Skill v2.0
-支持双团队模式（内部AI团队 + 互联网团队）
-根据项目类型智能配置团队结构
+Auto Create AI Team - Simple Local File Creator
+Creates AI team directory structures for projects.
+No network calls, no external dependencies, completely offline.
 """
 
 import os
 import sys
-import json
 import argparse
 from pathlib import Path
 
-def detect_project_type(project_path):
-    """自动检测项目类型 - 通用版本"""
-    project_name = os.path.basename(project_path).lower()
+def create_ai_team_structure(project_path, team_type='single', project_type='generic'):
+    """Create AI team directory structure in the specified project path."""
     
-    # 通用项目类型检测（基于常见关键词）
-    if any(keyword in project_name for keyword in ['web', 'website', 'frontend', 'ui', 'interface']):
-        return 'web_app'
-    elif any(keyword in project_name for keyword in ['ecommerce', 'shop', 'store', 'marketplace', '电商', '商店']):
-        return 'ecommerce'
-    elif any(keyword in project_name for keyword in ['cms', 'content', 'blog', 'article', '新闻', '博客']):
-        return 'content_management'
-    elif any(keyword in project_name for keyword in ['mobile', 'app', 'ios', 'android', 'phone', '移动']):
-        return 'mobile_app'
-    elif any(keyword in project_name for keyword in ['api', 'backend', 'server', 'microservice', '服务端']):
-        return 'backend_service'
-    else:
-        return 'generic'
-
-def ask_user_for_team_type(project_path):
-    """询问用户需要什么类型的团队"""
-    print(f"项目: {project_path}")
-    print("请选择团队类型:")
-    print("1. 单团队 (内部AI团队)")
-    print("2. 双团队 (内部AI团队 + 互联网团队)") 
-    print("3. 自定义 (手动指定)")
+    # Ensure project path exists
+    if not os.path.exists(project_path):
+        print(f"Error: Project path does not exist: {project_path}")
+        sys.exit(1)
     
-    while True:
-        try:
-            choice = input("请输入选择 (1/2/3): ").strip()
-            if choice == '1':
-                return 'single'
-            elif choice == '2':
-                return 'dual'
-            elif choice == '3':
-                return 'custom'
-            else:
-                print("无效选择，请输入 1, 2, 或 3")
-        except KeyboardInterrupt:
-            print("\n操作已取消")
-            sys.exit(1)
-
-def create_internal_ai_team(project_path, project_type):
-    """创建内部AI团队"""
-    ai_team_dir = os.path.join(project_path, 'ai-team', 'internal-team')
+    # Create ai-team directory
+    ai_team_dir = os.path.join(project_path, 'ai-team')
     os.makedirs(ai_team_dir, exist_ok=True)
     
-    # 创建团队信息目录
-    team_info_dir = os.path.join(ai_team_dir, 'team-info')
-    os.makedirs(team_info_dir, exist_ok=True)
+    # Create internal team
+    internal_dir = os.path.join(ai_team_dir, 'internal-team', 'team-info')
+    os.makedirs(internal_dir, exist_ok=True)
     
-    # 根据通用项目类型创建不同的团队成员
+    # Determine team members based on project type
     if project_type == 'web_app':
         members = ['Product Manager', 'Frontend Developer', 'Backend Developer', 'QA Engineer', 'UX/UI Designer']
     elif project_type == 'ecommerce':
         members = ['Technical Architect', 'Full-stack Developer', 'UX Designer', 'Payment Integration Specialist', 'QA Engineer']
-    elif project_type == 'content_management':
-        members = ['System Architect', 'Backend Developer', 'Content Strategist', 'Frontend Developer', 'Quality Assurance']
     elif project_type == 'mobile_app':
         members = ['Mobile Developer', 'Backend Engineer', 'UI/UX Designer', 'QA Engineer', 'DevOps Engineer']
-    elif project_type == 'backend_service':
-        members = ['Backend Architect', 'API Developer', 'Database Engineer', 'DevOps Engineer', 'Security Specialist']
     else:
         members = ['AI Assistant', 'Data Processor', 'Content Generator', 'Quality Checker', 'Project Coordinator']
     
-    # 创建团队配置文件
-    config_content = f"""# 内部AI团队配置
-项目类型: {project_type}
-团队类型: 内部AI团队
-创建时间: {os.popen('date').read().strip()}
-团队成员: {', '.join(members)}
-"""
+    # Create internal team config
+    with open(os.path.join(internal_dir, 'AI_TEAM_CONFIG.md'), 'w', encoding='utf-8') as f:
+        f.write(f"""# Internal AI Team Configuration
+Project Type: {project_type}
+Team Type: Internal AI Team
+Creation Date: {os.popen('date').read().strip()}
+Team Members: {', '.join(members)}
+""")
     
-    with open(os.path.join(team_info_dir, 'AI_TEAM_CONFIG.md'), 'w', encoding='utf-8') as f:
-        f.write(config_content)
-    
-    # 创建团队成员文件
-    members_content = f"""# 团队成员介绍
-
-## 内部AI团队成员
-
-{chr(10).join([f"- **{member}**: 负责相关任务" for member in members])}
-
-## 团队职责
-- 自动监控和更新项目数据
-- 分析相关信息，完善项目内容
-- 探索创新点和优化方案
-- 确保数据质量和准确性
-"""
-    
-    with open(os.path.join(team_info_dir, 'TEAM_MEMBERS.md'), 'w', encoding='utf-8') as f:
-        f.write(members_content)
-    
-    return ai_team_dir
-
-def create_internet_team(project_path, project_type):
-    """创建互联网团队"""
-    internet_team_dir = os.path.join(project_path, 'ai-team', 'internet-team')
-    os.makedirs(internet_team_dir, exist_ok=True)
-    
-    # 创建团队信息目录
-    team_info_dir = os.path.join(internet_team_dir, 'team-info')
-    os.makedirs(team_info_dir, exist_ok=True)
-    
-    # 互联网团队成员（通用）
-    members = ['Product Manager', 'Marketing Specialist', 'Social Media Operator', 'Data Analyst', 'Business Development Manager', 'User Researcher']
-    
-    # 创建团队配置文件
-    config_content = f"""# 互联网团队配置
-项目类型: {project_type}
-团队类型: 互联网团队
-创建时间: {os.popen('date').read().strip()}
-团队成员: {', '.join(members)}
-"""
-    
-    with open(os.path.join(team_info_dir, 'INTERNET_TEAM_CONFIG.md'), 'w', encoding='utf-8') as f:
-        f.write(config_content)
-    
-    # 创建团队成员文件
-    members_content = f"""# 互联网团队成员介绍
-
-## 互联网团队成员
-
-{chr(10).join([f"- **{member}**: 负责相关任务" for member in members])}
-
-## 团队职责
-- 产品规划和商业化策略
-- 品牌推广和用户获取
-- 社交媒体运营和社区管理
-- 用户行为分析和产品优化
-- 商务合作和收入拓展
-- 用户反馈收集和需求调研
-"""
-    
-    with open(os.path.join(team_info_dir, 'TEAM_MEMBERS.md'), 'w', encoding='utf-8') as f:
-        f.write(members_content)
-    
-    return internet_team_dir
-
-def create_project_progress_file(project_path, team_type, project_type):
-    """创建项目进展概览文件"""
-    progress_file = os.path.join(project_path, 'ai-team', 'PROJECT_PROGRESS.md')
-    
+    # Create internet team if dual mode
     if team_type == 'dual':
-        team_desc = "双团队架构（内部AI团队 + 互联网团队）"
-    elif team_type == 'single':
-        team_desc = "单团队架构（内部AI团队）"
-    else:
-        team_desc = "自定义团队架构"
+        internet_dir = os.path.join(ai_team_dir, 'internet-team', 'team-info')
+        os.makedirs(internet_dir, exist_ok=True)
+        
+        internet_members = ['Product Manager', 'Marketing Specialist', 'Social Media Operator', 'Data Analyst', 'Business Development Manager']
+        
+        with open(os.path.join(internet_dir, 'INTERNET_TEAM_CONFIG.md'), 'w', encoding='utf-8') as f:
+            f.write(f"""# Internet Team Configuration  
+Project Type: {project_type}
+Team Type: Internet Team
+Creation Date: {os.popen('date').read().strip()}
+Team Members: {', '.join(internet_members)}
+""")
     
-    content = f"""# 项目进展概览
-
-## 项目基本信息
-- **项目名称**: {os.path.basename(project_path)}
-- **项目类型**: {project_type}
-- **团队架构**: {team_desc}
-- **创建时间**: {os.popen('date').read().strip()}
-
-## 团队状态
-- **内部AI团队**: ✅ 已创建并启动
-- **互联网团队**: {'✅ 已创建并启动' if team_type == 'dual' else '❌ 未创建'}
-
-## 当前任务
-- 监控项目进展
-- 自动执行团队任务
-- 定期生成进展报告
-
-## 下一步计划
-- 根据项目需求调整团队配置
-- 优化团队协作流程
-- 持续改进团队能力
-"""
-    
-    os.makedirs(os.path.dirname(progress_file), exist_ok=True)
-    with open(progress_file, 'w', encoding='utf-8') as f:
-        f.write(content)
+    # Create project progress file
+    with open(os.path.join(ai_team_dir, 'PROJECT_PROGRESS.md'), 'w', encoding='utf-8') as f:
+        team_desc = "Dual team (Internal + Internet)" if team_type == 'dual' else "Single team (Internal only)"
+        f.write(f"""# Project Progress Overview
+Project Name: {os.path.basename(project_path)}
+Project Type: {project_type}
+Team Architecture: {team_desc}
+Creation Date: {os.popen('date').read().strip()}
+""")
 
 def main():
-    parser = argparse.ArgumentParser(description='Auto Create AI Team Skill v2.0')
-    parser.add_argument('--project-path', required=True, help='项目路径')
-    parser.add_argument('--project-type', choices=['web_app', 'ecommerce', 'content_management', 'mobile_app', 'backend_service', 'generic'], help='项目类型')
-    parser.add_argument('--team-type', choices=['single', 'dual', 'custom'], help='团队类型')
-    parser.add_argument('--auto-detect', action='store_true', help='自动检测项目类型')
-    parser.add_argument('--ask-user', action='store_true', help='询问用户配置')
+    parser = argparse.ArgumentParser(description='Create AI team directory structure for projects')
+    parser.add_argument('--project-path', required=True, help='Path to the project directory')
+    parser.add_argument('--team-type', choices=['single', 'dual'], default='single', help='Team type (default: single)')
+    parser.add_argument('--project-type', choices=['web_app', 'ecommerce', 'mobile_app', 'generic'], default='generic', help='Project type (default: generic)')
     
     args = parser.parse_args()
     
-    # 确保项目路径存在
-    if not os.path.exists(args.project_path):
-        print(f"错误: 项目路径不存在: {args.project_path}")
-        sys.exit(1)
+    print(f"Creating AI team structure...")
+    print(f"Project path: {args.project_path}")
+    print(f"Team type: {args.team_type}")
+    print(f"Project type: {args.project_type}")
     
-    # 确定项目类型
-    if args.project_type:
-        project_type = args.project_type
-    elif args.auto_detect:
-        project_type = detect_project_type(args.project_path)
-        print(f"自动检测到项目类型: {project_type}")
-    else:
-        project_type = 'generic'
+    create_ai_team_structure(args.project_path, args.team_type, args.project_type)
     
-    # 确定团队类型
-    if args.team_type:
-        team_type = args.team_type
-    elif args.ask_user:
-        team_type = ask_user_for_team_type(args.project_path)
-    else:
-        # 默认根据项目类型决定
-        if project_type in ['ecommerce', 'mobile_app']:
-            team_type = 'dual'  # 电商和移动应用默认双团队
-        else:
-            team_type = 'single'  # 其他项目默认单团队
-    
-    print(f"正在为项目创建AI团队...")
-    print(f"项目路径: {args.project_path}")
-    print(f"项目类型: {project_type}")
-    print(f"团队类型: {team_type}")
-    
-    # 创建内部AI团队
-    internal_team_path = create_internal_ai_team(args.project_path, project_type)
-    print(f"✅ 内部AI团队创建完成: {internal_team_path}")
-    
-    # 创建互联网团队（如果是双团队）
-    if team_type == 'dual':
-        internet_team_path = create_internet_team(args.project_path, project_type)
-        print(f"✅ 互联网团队创建完成: {internet_team_path}")
-    
-    # 创建项目进展文件
-    create_project_progress_file(args.project_path, team_type, project_type)
-    print(f"✅ 项目进展概览文件创建完成")
-    
-    print(f"\n🎉 AI团队创建成功！")
-    print(f"团队目录: {os.path.join(args.project_path, 'ai-team')}")
+    print(f"\n✅ AI team structure created successfully!")
+    print(f"Location: {os.path.join(args.project_path, 'ai-team')}")
 
 if __name__ == '__main__':
     main()
