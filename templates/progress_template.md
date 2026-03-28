@@ -1,61 +1,61 @@
-# {{PROJECT_NAME}} - 项目进展概览
+# {{PROJECT_NAME}} - Project Progress
 
-## 📋 项目基本信息
-- **项目名称**: {{PROJECT_NAME}}
-- **创建时间**: {{CREATION_DATE}}
-- **项目类型**: {{PROJECT_TYPE}}
-- **团队模式**: {{TEAM_MODE}}
+## 📋 {{PROJECT_INFO}}
+- **{{PROJECT_NAME_LABEL}}**: {{PROJECT_NAME}}
+- **{{CREATION_TIME}}**: {{CREATION_DATE}}
+- **{{PROJECT_TYPE_LABEL}}**: {{PROJECT_TYPE}}
+- **{{TEAM_TYPE}}**: {{TEAM_MODE_DESC}}
 
-## 🤖 团队结构
+## 🤖 {{TEAM_STRUCTURE}}
 {% if TEAM_MODE == "dual" %}
-### 内部AI团队（产品开发）
-- **团队规模**: {{INTERNAL_TEAM_SIZE}}
-- **主要角色**: {{INTERNAL_TEAM_ROLES}}
-- **核心职责**: 产品开发、技术实现、质量保证
+### {{INTERNAL_TEAM_SECTION}}
+- **{{TEAM_SIZE_LABEL}}**: {{INTERNAL_TEAM_SIZE}}
+- **{{MAIN_ROLES}}**: {{INTERNAL_TEAM_ROLES}}
+- **{{CORE_RESPONSIBILITIES}}**: {{PRODUCT_DEV}}
 
-### 互联网团队（产品运营）  
-- **团队规模**: {{INTERNET_TEAM_SIZE}}
-- **主要角色**: {{INTERNET_TEAM_ROLES}}
-- **核心职责**: 市场推广、用户增长、商业化运营
+### {{INTERNET_TEAM_SECTION}}  
+- **{{TEAM_SIZE_LABEL}}**: {{INTERNET_TEAM_SIZE}}
+- **{{MAIN_ROLES}}**: {{INTERNET_TEAM_ROLES}}
+- **{{CORE_RESPONSIBILITIES}}**: {{MARKETING_GROWTH}}
 
 {% elif TEAM_MODE == "single" %}
-### 单一AI团队
-- **团队规模**: {{TEAM_SIZE}}
-- **主要角色**: {{TEAM_ROLES}}
-- **核心职责**: 全流程产品开发和运营
+### {{SINGLE_TEAM_SECTION}}
+- **{{TEAM_SIZE_LABEL}}**: {{TEAM_SIZE}}
+- **{{MAIN_ROLES}}**: {{TEAM_ROLES}}
+- **{{CORE_RESPONSIBILITIES}}**: {{FULL_PROCESS}}
 
 {% else %}
-### 自定义团队
-- **配置文件**: custom_team_config.json
-- **团队详情**: 请查看自定义配置文件
+### Custom Team
+- **Configuration file**: custom_team_config.json
+- **Details**: See custom configuration file
 
 {% endif %}
 
-## 🎯 当前状态
-- **团队创建**: ✅ 已完成
-- **配置文件**: ✅ 已生成
-- **自动化脚本**: ✅ 已部署
-- **运行日志**: ✅ 已启用
+## 🎯 {{CURRENT_STATUS}}
+- **{{TEAM_CREATED}}**: ✅ {{COMPLETED}}
+- **{{CONFIG_FILES}}**: ✅ {{GENERATED}}
+- **{{AUTOMATION_SCRIPTS}}**: ✅ {{DEPLOYED}}
+- **{{RUNTIME_LOGS}}**: ✅ {{ENABLED}}
 
-## 📈 下一步计划
-1. AI团队开始自动运行
-2. 监控团队工作进展
-3. 定期生成进展报告
-4. 根据需要调整团队配置
+## 📈 {{NEXT_STEPS}}
+1. {{NEXT_STEP_1}}
+2. {{NEXT_STEP_2}}
+3. {{NEXT_STEP_3}}
+4. {{NEXT_STEP_4}}
 
-## 📁 目录结构
+## 📁 {{DIRECTORY_STRUCTURE}}
 ```
 {{PROJECT_PATH}}/
 ├── ai-team/
-│   ├── team-info/          # 团队信息和配置
+│   ├── team-info/          # {{TEAM_INFO_DIR}}
 │   {% if TEAM_MODE == "dual" %}
-│   ├── internal-team/      # 内部AI团队
-│   └── internet-team/      # 互联网团队
+│   ├── internal-team/      # {{INTERNAL_TEAM_DIR}}
+│   └── internet-team/      # {{INTERNET_TEAM_DIR}}
 │   {% else %}
-│   └── single-team/        # 单一团队
+│   └── single-team/        # {{SINGLE_TEAM_DIR}}
 │   {% endif %}
-└── [项目原有目录]
+└── [{{ORIGINAL_DIRS}}]
 ```
 
 ---
-*此文件由 Auto Create AI Team Skill v2.0 自动生成*
+*{{AUTO_GENERATED}}*

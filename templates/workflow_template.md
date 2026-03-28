@@ -1,61 +1,61 @@
-# AI团队工作流程
+# {{WORKFLOW_TITLE}}
 
-## 项目类型: {{project_type}}
+## {{PROJECT_TYPE_LABEL}}: {{project_type}}
 
-## 团队模式: {{team_mode}}
+## {{TEAM_TYPE}}: {{team_mode}}
 
 {% if team_mode == "dual" %}
-### 双团队协作流程
+### {{DUAL_WORKFLOW}}
 
-#### 内部AI团队 (产品开发)
-- **创意设计师**: 负责产品创意和核心功能设计
-- **技术开发师**: 负责技术实现和工具集成
-- **质量保证师**: 负责产品质量和用户体验
-- **内容策展师**: 负责内容管理和分类标签
+#### {{INTERNAL_TEAM}} ({{PRODUCT_DEV_LABEL}})
+- **Creative Designer**: Product ideation and core feature design
+- **Technical Developer**: Technical implementation and tool integration
+- **QA Engineer**: Product quality and user experience
+- **Content Curator**: Content management and categorization
 
-#### 互联网团队 (产品运营)  
-- **产品经理**: 负责产品规划和商业化策略
-- **市场营销专家**: 负责品牌推广和用户获取
-- **社交媒体运营**: 负责各平台内容分发和社区运营
-- **数据分析专家**: 负责用户行为分析和产品优化
-- **商务合作经理**: 负责合作伙伴关系和收入拓展
-- **用户体验研究员**: 负责用户反馈收集和需求调研
+#### {{INTERNET_TEAM}} ({{MARKETING_GROWTH_LABEL}})  
+- **Product Manager**: Product planning and commercialization strategy
+- **Marketing Expert**: Brand promotion and user acquisition
+- **Social Media Operator**: Platform content distribution and community operations
+- **Data Analyst**: User behavior analysis and product optimization
+- **Business Development Manager**: Partnership relations and revenue expansion
+- **UX Researcher**: User feedback collection and demand research
 
-#### 协作机制
-1. **每周同步会议**: 双团队定期同步进展
-2. **共享文档库**: 所有文档在统一目录管理
-3. **交叉评审**: 重要决策需要双团队共同确认
-4. **数据共享**: 用户数据和产品数据双向流动
+#### {{COLLABORATION_MECHANISM}}
+1. **{{WEEKLY_SYNC}}**: Dual team regular progress synchronization
+2. **{{SHARED_DOCS}}**: All documents managed in unified directory
+3. **{{CROSS_REVIEW}}**: Important decisions require dual team confirmation
+4. **{{DATA_SHARING}}**: User and product data bidirectional flow
 
 {% elif team_mode == "single" %}
-### 单团队工作流程
+### {{SINGLE_WORKFLOW}}
 
-#### 核心角色
-- **Team Leader**: 负责整体协调和任务分配
-- **Specialist Roles**: 根据项目类型配置专业角色
-- **Quality Assurance**: 确保输出质量和一致性
+#### Core Roles
+- **Team Leader**: Overall coordination and task assignment
+- **Specialist Roles**: Configured based on project type
+- **Quality Assurance**: Output quality and consistency
 
-#### 工作流程
-1. **任务分配**: Team Leader分配具体任务
-2. **并行执行**: 各角色同时执行各自任务
-3. **质量检查**: QA角色验证输出质量
-4. **成果整合**: 整合各角色输出形成最终成果
+#### Workflow Steps
+1. **Task Assignment**: Team Leader assigns specific tasks
+2. **Parallel Execution**: Each role executes their tasks simultaneously
+3. **Quality Check**: QA role validates output quality
+4. **Integration**: Integrate outputs to form final deliverables
 
 {% else %}
-### 自定义团队工作流程
+### {{CUSTOM_WORKFLOW}}
 
-根据用户指定的自定义配置执行相应工作流程。
+Execute workflow according to user-specified custom configuration.
 
 {% endif %}
 
-## 多模型支持
-- **免费模型优先**: 简单任务使用免费模型
-- **付费模型精准**: 复杂任务使用高性能付费模型  
-- **自动降级**: 付费模型不可用时自动切换到免费模型
-- **结果聚合**: 多模型结果对比确保质量
+## {{MULTI_MODEL_SUPPORT}}
+- **{{FREE_FIRST}}**: Simple tasks use free models
+- **{{PAID_PRECISION}}**: Complex tasks use high-performance paid models
+- **{{AUTO_FALLBACK}}**: Auto-switch to free models when paid unavailable
+- **{{RESULT_AGGREGATION}}**: Multi-model comparison for quality assurance
 
-## 自动化运行
-- **定时任务**: 定期执行数据更新和分析
-- **事件触发**: 特定事件触发相应团队行动
-- **进度监控**: 实时监控任务执行状态
-- **异常处理**: 自动处理常见错误和异常情况
+## {{AUTOMATION}}
+- **{{SCHEDULED_TASKS}}**: Regular data updates and analysis
+- **{{EVENT_TRIGGERED}}**: Specific events trigger team actions
+- **{{PROGRESS_MONITORING}}**: Real-time task execution status monitoring
+- **{{EXCEPTION_HANDLING}}**: Automatic handling of common errors
