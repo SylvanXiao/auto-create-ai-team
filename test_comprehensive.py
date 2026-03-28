@@ -11,12 +11,14 @@ import shutil
 import subprocess
 import unittest
 
+
 class TestAutoCreateAITeam(unittest.TestCase):
     
     def setUp(self):
         """Set up test environment"""
         self.test_dir = tempfile.mkdtemp()
-        self.skill_path = "/root/.openclaw/workspace/skills/auto-create-ai-team"
+        # Use relative path from test file location
+        self.skill_path = os.path.dirname(os.path.abspath(__file__))
         self.create_ai_team_script = os.path.join(self.skill_path, "create_ai_team.py")
         
     def tearDown(self):
